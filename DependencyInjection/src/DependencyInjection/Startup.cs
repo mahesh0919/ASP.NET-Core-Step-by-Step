@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
+using DependencyInjection.Services;
 
 namespace DependencyInjection
 {
@@ -14,6 +15,9 @@ namespace DependencyInjection
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            // Register application services.
+            services.AddScoped<IDBFactory, DBFactory>();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -29,6 +33,7 @@ namespace DependencyInjection
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
+            // run is the end point in middleware, from here no HTTP request is proceseeded further
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
