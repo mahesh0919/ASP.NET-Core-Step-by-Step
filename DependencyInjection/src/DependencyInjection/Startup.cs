@@ -6,6 +6,7 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
 using DependencyInjection.Services;
+using DependencyInjection.Middleware;
 
 namespace DependencyInjection
 {
@@ -22,6 +23,10 @@ namespace DependencyInjection
 
         public void Configure(IApplicationBuilder app)
         {
+
+            app.UseMiddleware<AuthorizationMiddleware>();
+
+
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
             {
@@ -33,6 +38,7 @@ namespace DependencyInjection
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
+ 
             // run is the end point in middleware, from here no HTTP request is proceseeded further
             app.Run(async (context) =>
             {
