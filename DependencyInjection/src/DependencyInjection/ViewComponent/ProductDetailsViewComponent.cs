@@ -18,6 +18,7 @@ namespace WebApplication1.Controllers
         {
             List<Product> productList = _prodFactory.GetAllProducts();
             Product prod = (from p in productList
+                            where p.ProductID == id
                             select p).FirstOrDefault();
 
             return View(prod);
