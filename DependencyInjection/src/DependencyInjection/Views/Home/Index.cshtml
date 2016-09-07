@@ -10,3 +10,17 @@
 {
     <p> @p.Name </p>
 }
+
+<p><b>Invoking View Components(Child Components)</b></p>
+<div>
+    @await Component.InvokeAsync("ProductDetails", 1)
+</div>
+
+@*When this component is called from within the view, 
+the argument representing the number to take is passed along with the name of the component:
+
+@await Component.InvokeAsync("ProductDetails", 1)
+From RC2, this behavour will change so that the parameter representing 
+the number to take will be passed as either a dictionary or an anonymous type:
+
+@await Component.InvokeAsync("ProductDetails", new { id = 1 })*@
